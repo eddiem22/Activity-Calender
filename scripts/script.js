@@ -99,22 +99,26 @@ function toggleSidemenu(){
 // Initializes event listeners for each of the library images (so they can be dragged)
 function initializeLibraryListeners(){
 	// 1. When an image from the library is clicked
+	/*  Note to self:
+	 *  According to this: https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+	 *  addEventListener() should have these as arguments, at the very least:
+	 *  > an event listener type (obviously)
+	 *  > a function
+	 */
 	for(let i = 0; i < draggables.length; i++){
 		/*draggables[i].addEventListener("touchstart", () => {*/
-		/* TODO:
-		 * Add draggables="true" to each <img> during this loop
-		 * draggables[i].setAttribute("draggable","true"); maybe?
-		 * Do the same for script2.js later down the line
-		 * - Kyle
-		 */
 		draggables[i].setAttribute("draggable", "true");
 		//draggables[i].preventDefault(); //Disables the default interactions of the element, if any
 		//draggables[i].addEventListener("dragstart", () => {
-		draggables[i].addEventListener("mousedown", () => { //Trying this in the meantime. - Kyle
-			currentElement = i;
-			toDrag = draggables[currentElement].cloneNode(true)
-			toDrag.classList.add("copy");
-		})
+		draggables[i].addEventListener("mousedown", imgMouseDown); //TODO: Change function argument to an actual function. - Kyle
+			/*  The lines following this block comment probably need to be
+			 *  tied to a "mousedown"/"onmousedown" function of some sort.
+			 *  - Kyle
+			 */
+			//currentElement = i;
+			//toDrag = draggables[currentElement].cloneNode(true)
+			//toDrag.classList.add("copy");
+		
 
 	}
 
@@ -127,7 +131,7 @@ function initializeLibraryListeners(){
 	for (item of draggables){
 		/*item.addEventListener("touchmove", () => {*/
 		/*item.addEventListener("drag", () => {*/
-		item.addEventListener("mousemove", () => {
+		item.addEventListener("mousemove", () => { //TODO: Change function argument to an actual function. - Kyle
 			//x = event.touches[0].clientX;
 			//y = event.touches[0].clientY;
 			x = event.clientX; 
@@ -146,11 +150,12 @@ function initializeLibraryListeners(){
 	for (item of draggables){
 		/*item.addEventListener("touchend", () => {*/
 		/*item.addEventListener("dragend", () => {*/
-		item.addEventListener("mouseup", () => {
-			toDrag.style.display = "none" //--> idk if this is necessary
+		item.addEventListener("mouseup", () => { //TODO: Change function argument to an actual function. - Kyle
+			//toDrag.style.display = "none" //--> idk if this is necessary
 
 			// Check if element was dragged to top of screen, with intent of being deleted
 			// Otherwise, append the image to wherever the user released
+			//TODO: Move all the dragging logic to its own function later. - Kyle
 			console.log("image ended drag at (x, y): (" + x + ", " + y + ")");
 			console.log("toDrag.style.left: " + toDrag.style.left);
 			console.log("toDrag.style.top: " + toDrag.style.top);
@@ -174,7 +179,10 @@ function initializeLibraryListeners(){
 	}
 }
 
-
+/*  TODO: Move the dragging logic to their own functions later,
+ *  in the same manner as initializeLibraryListeners() above.
+ *  - Kyle
+ */
 // Adds event listeners to the images on the calendar, in the same way we added event listeners to each image in the library
 function updateCopies(){
 	// Get the latest image added to the calendar (so we can initialize event listeners for it)
@@ -216,6 +224,13 @@ function updateCopies(){
 		}
 	})
 }
+
+//TODO: Move mouse down logic from initializeLibraryListeners() here - Kyle
+function imgMouseDown() {
+	console.log("Hello from the imgMouseDown() function");
+}
+
+function img
 
 // Reloads latest version
 function reloadPreviousCalendar(){
