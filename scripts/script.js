@@ -14,16 +14,13 @@ const sideMenu = document.querySelector(".sidemenu");
 // Coordinates of the currently selected element
 var x = 0
 var y = 0
-// Index of element being dragged (i.e. its position relative to all the other images in the side menu library)
-var currentElement = 0;
-// Element being dragged currently OR last element that was dragged
-var toDrag = null
-// Array of elements that have already been dragged onto the calendar from the libraray
-var copies = [];
-// Cells of the calendar table
-const containers = document.querySelectorAll("div.p1 table tr td")
-// Images that can be dragged from the library
-const draggables = document.querySelectorAll("div.sidemenu table tr td img")
+
+var currentElement = 0; // Index of element being dragged (i.e. its position relative to all the other images in the side menu library)
+var toDrag = null // Element being dragged currently OR last element that was dragged
+var copies = []; // Array of elements that have already been dragged onto the calendar from the libraray
+const containers = document.querySelectorAll("div.p1 table tr td") // Cells of the calendar table
+const draggables = document.querySelectorAll("div.sidemenu table tr td img") // Images that can be dragged from the library
+//TODO: draggables probably shouldn't be a const anymore, now that we can load images externally. - Kyle
 
 // Initializing the date functionality of the app
 // Note how sunday is a special case (in the Date library, Sunday = 0, Monday = 1, etc. but in our calendar, "This week" = 0, Monday = 1, ... Sunday = 7)
@@ -107,7 +104,7 @@ function initializeLibraryListeners(){
 	 */
 	for(let i = 0; i < draggables.length; i++){
 		/*draggables[i].addEventListener("touchstart", () => {*/
-		draggables[i].setAttribute("draggable", "true");
+		draggables[i].setAttribute("draggable", "true"); //Probably not necessary, considering we're not using drag events any more. Wouldn't hurt to leave it in though. - Kyle
 		//draggables[i].preventDefault(); //Disables the default interactions of the element, if any
 		//draggables[i].addEventListener("dragstart", () => {
 		draggables[i].addEventListener("mousedown", imgMouseDown); //TODO: Change function argument to an actual function. - Kyle
@@ -131,9 +128,17 @@ function initializeLibraryListeners(){
 	for (item of draggables){
 		/*item.addEventListener("touchmove", () => {*/
 		/*item.addEventListener("drag", () => {*/
-		item.addEventListener("mousemove", () => { //TODO: Change function argument to an actual function. - Kyle
+
+		//TODO: Change function argument to an actual function. - Kyle
+		item.addEventListener("mousemove", imgMouseMove);
 			//x = event.touches[0].clientX;
 			//y = event.touches[0].clientY;
+			/*  TODO:
+			 *  All of this stuff after addEventListener probably needs to be
+			 *  its own function.
+			 *  - Kyle
+			 */
+			/*
 			x = event.clientX; 
 			y = event.clientY;
 			console.log("image currently dragged to (x, y): (" + x + ", " + y + ")");
@@ -142,20 +147,24 @@ function initializeLibraryListeners(){
 			toDrag.style.width = "250px";
 			toDrag.style.left = x+'px';
 			toDrag.style.top = y+'px';
-
-		})
+			*/
 	}
 
 	// 3. When an image from the library has been released
 	for (item of draggables){
 		/*item.addEventListener("touchend", () => {*/
 		/*item.addEventListener("dragend", () => {*/
-		item.addEventListener("mouseup", () => { //TODO: Change function argument to an actual function. - Kyle
+		/*  Note to self:
+		 *  Getting an event-triggering element: https://stackoverflow.com/questions/6071095/get-the-element-triggering-an-onclick-event-in-jquery
+		 *  The "this" keyword: https://www.w3schools.com/js/js_this.asp
+		 */
+		item.addEventListener("mouseup",imgMouseUp); //TODO: Change function argument to an actual function. - Kyle
 			//toDrag.style.display = "none" //--> idk if this is necessary
 
 			// Check if element was dragged to top of screen, with intent of being deleted
 			// Otherwise, append the image to wherever the user released
 			//TODO: Move all the dragging logic to its own function later. - Kyle
+			/*
 			console.log("image ended drag at (x, y): (" + x + ", " + y + ")");
 			console.log("toDrag.style.left: " + toDrag.style.left);
 			console.log("toDrag.style.top: " + toDrag.style.top);
@@ -175,7 +184,7 @@ function initializeLibraryListeners(){
 				// Store the latest version of the calendar in local memory
 				localStorage.setItem("latest version", document.body.innerHTML);
 			}
-		})
+			*/
 	}
 }
 
@@ -228,9 +237,42 @@ function updateCopies(){
 //TODO: Move mouse down logic from initializeLibraryListeners() here - Kyle
 function imgMouseDown() {
 	console.log("Hello from the imgMouseDown() function");
+	//console.log("dragObject: "+dragObject);
+	console.log("event.clientX and event.clientY: (" + event.clientX + ", " + event.clientY + ")");
+
+	//Get HTML elements at a given coordinate set: https://stackoverflow.com/questions/1259585/get-element-at-specified-position-javascript
+	let elementsAtClickEvent = document.elementsFromPoint(event.clientX, event.clientY);
+	/*
+	console.log("Here's a list of the elements found at that position: ")
+	for (var i = 0; i < elements.length; i++) {
+		console.log("elements[" + i + "]: ");
+		console.log(elements[i]);
+	}
+	*/
+
+	toDrag = elementsAtClickEvent[0].cloneNode(true); //Clone the <img> found at the coordinates of the event
+	console.log("toDrag:");
+	console.log(toDrag);
+	toDrag.classList.add("copy"); //Add the HTML class "copy" to the clone
+
+	//Taken from old move logic; remove this line later.
+	//Just checking to see if it copies the right image.
+	document.body.append(toDrag);
+
+	//currentElement = i;
+	//toDrag = draggables[currentElement].cloneNode(true)
+	//toDrag.classList.add("copy");
 }
 
-function img
+//TODO: Same as imgMouseDown.
+function imgMouseMove() {
+	console.log("Hello from the imgMouseMove() function");
+}
+
+//TODO: Same as imgMosueDown.
+function imgMouseUp() {
+	console.log("Hello from the imgMouseUp() function");
+}
 
 // Reloads latest version
 function reloadPreviousCalendar(){
