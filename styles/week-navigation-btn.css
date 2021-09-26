@@ -1,12 +1,12 @@
 .this-week-link, .next-week-link{
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: white;
   text-decoration: none;
-  padding: 20px;
-  width: 17%;
+  padding: 15px;
+  width: 15%;
   height: 1%;
   text-align: center;
-  font-family: 'Billionary';
+  font-family: 'Billionary'; 
 }
 
 .next-week-link {

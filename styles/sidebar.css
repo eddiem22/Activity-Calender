@@ -12,10 +12,10 @@
   position: absolute;
   right: -21vw;
   background-color: #fbd988;
-  width: 22vw;
-  height: 65vh;
+  width: 22vw !important;
+  height: 100%;
   transition: 0.4s;
-  overflow: scroll;
+  overflow: scroll !important;
   height: 100vh;
 }
 
@@ -23,14 +23,20 @@
 .menuOnLeft table{
   position: absolute;
   display: inline;
-  border: 2px solid black;
+  height: 100%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.sidemenu table tbody,
+.menuOnLeft table tbody{
+  height: 100vh;
 }
 
 .sidemenu table td,
 .menuOnLeft table td{
   padding: 0;
   margin: 0;
-  border: 2px solid black;
   height: 10vh;
 }
 
@@ -38,12 +44,50 @@
 .menuOnLeft table td img{
   padding: 0;
   width: 4.9vw;
+  object-fit: scale-down;
+  height: 7.9vh;
+}
+
+#transport-imgs-row img,
+#popular-imgs-row img{
+  background-color: white;
 }
 
 .copy{
   width: 4.9vw !important;
   /* background-color: white;
   border-radius: 10px; */
+}
+#people-imgs-row, #popular-imgs-row, .settings-area{
+  display: grid;
+  grid-template-columns: 5vw 5vw 5vw 5vw;
+  grid-gap: 10px;
+  text-align: center;
+}
+
+.settings-area td:nth-child(2){
+  grid-column: 2 / 4;
+}
+#transport-imgs-row, #activity-imgs-row{
+  display: grid;
+  grid-template-rows: 10vh 10vh;
+  grid-auto-flow: column;
+  grid-template-columns: 5vw 5vw 5vw 5vw;
+  grid-gap: 10px;
+  text-align: center;
+}
+
+.settings-area{
+  margin-top: 2vh;
+}
+@media only screen  and (min-width : 1824px) {
+  .img-row-title{
+    font-size: 2.5rem;
+  }
+
+  .sidemenu {
+    padding-right: 15px;
+  }
 }
 
 /* .sidebar:active {

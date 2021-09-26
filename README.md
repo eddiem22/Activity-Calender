@@ -5,6 +5,6 @@ Families or organisations with people in their care with learning disabilities/a
 We therefore have digitise this into a desktop app, which eliminates the upkeep of paper symbols, provides a rich interface for carers/support workers and the individual to interact can with a more modernized approach.
 
 ## How to Use:
-Please go [here](https://github.com/j97051/Activity-Calender/blob/main/desktop-application/ActivityCalender2021-Release-v1.0.4.zip) and click the 'Download' button to download the desktop application.
+Please go [here](https://github.com/j97051/Activity-Calender/blob/main/desktop-application/ActivityCalender2021-Release-v1.0.5.zip) and click the 'Download' button to download the desktop application.
 
 Unzip the compressed folder and then follow the instructions in the README file inside of the extracted zip folder to start the app.

@@ -21,6 +21,7 @@ function abcPeoplePics(){
                 var tableDiv = document.createElement("td");
                 var img = document.createElement("img");
                 img.src = item;
+                img.classList.add("img-lib");
                 tableDiv.appendChild(img);
                 peopleTableRow.appendChild(tableDiv);
             });
@@ -67,6 +68,7 @@ function abcTransportPics(){
                 var tableDiv = document.createElement("td");
                 var img = document.createElement("img");
                 img.src = item;
+                img.classList.add("img-lib");
                 tableDiv.appendChild(img);
                 transportTableRow.appendChild(tableDiv);
             });
@@ -112,6 +114,7 @@ function abcActivityPics(){
                 var tableDiv = document.createElement("td");
                 var img = document.createElement("img");
                 img.src = item;
+                img.classList.add("img-lib");
                 tableDiv.appendChild(img);
                 activityTableRow.appendChild(tableDiv);
             });
@@ -136,10 +139,14 @@ function abcActivityPics(){
 }
 
 //call all alphabetizer methods at startup
+console.log("1");
 abcPeoplePics();
 setTimeout(()=>{
+    console.log("2");
     abcTransportPics();
     setTimeout(()=>{
+        console.log("3");
         abcActivityPics()
-    }, 1000);
-}, 1000);
+    }, 2000);
+}, 5000);
+
