@@ -179,9 +179,11 @@ function moveIntoNextWeek(){
 	} else if (dateToday.getDay() != 1){
 		// It is not monday, so we can say that the week hasn't been reset yet
 		localStorage.setItem("reset1?", "false")
-	}
-	// Note: there is no option for if the day is monday and the week has been reset yet because we wouldn't 
-	// need to do anything then
+	} else if (dateToday.getDay() == 1){
+		// Initialization of this storage/memory for the first time
+		localStorage.setItem("reset1?", "false")
+		moveIntoNextWeek()
+	}  
 }
 
 // Invoke all methods needed to boot up app
