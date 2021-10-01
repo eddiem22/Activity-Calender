@@ -9,44 +9,68 @@
 var peopleFileList = localStorage.getItem("peoplePics");
 
 function selectPeopleFolder(e) {
+    var arr = []
     var theFiles = e.target.files;
+    Array.prototype.forEach.call(theFiles, file =>{
+        arr.push(file.name);
+    });
+    localStorage.setItem("peopleFiles", arr);
     var relativePath = theFiles[0].webkitRelativePath;
     var pathShower = document.querySelector(".people-folder-path");
     var folder = relativePath.split("/");
     var folderPath = `C:/documents/activity calender/images/${folder[0]}`
+    localStorage.setItem("peopleFolder", folder[0]);
     pathShower.innerHTML = folderPath;
     //now saving folderPath to app-settings.json
     saveToJsonFile(folderPath, "PEOPLE");
 }
 
 function selectTransportFolder(e) {
+    var arr2 = []
     var theFiles = e.target.files;
+    Array.prototype.forEach.call(theFiles, file =>{
+        arr2.push(file.name);
+    });
+    localStorage.setItem("transportFiles", arr2);
     var relativePath = theFiles[0].webkitRelativePath;
     var pathShower = document.querySelector(".transport-folder-path");
     var folder = relativePath.split("/");
     var folderPath = `C:/documents/activity calender/images/${folder[0]}`
+    localStorage.setItem("transportFolder", folder[0]);
     pathShower.innerHTML = folderPath;
     //now saving folderPath to app-settings.json
     saveToJsonFile(folderPath, "TRANSPORT");
 }
 
 function selectPopularFolder(e) {
+    var arr4 = []
     var theFiles = e.target.files;
+    Array.prototype.forEach.call(theFiles, file =>{
+        arr4.push(file.name);
+    });
+    localStorage.setItem("popularFiles", arr4);
     var relativePath = theFiles[0].webkitRelativePath;
     var pathShower = document.querySelector(".popular-folder-path");
     var folder = relativePath.split("/");
     var folderPath = `C:/documents/activity calender/images/${folder[0]}`
+    localStorage.setItem("popularFolder", folder[0]);
     pathShower.innerHTML = folderPath;
     //now saving folderPath to app-settings.json
     saveToJsonFile(folderPath, "POPULAR");
 }
 
 function selectActivityFolder(e) {
+    var arr3 = []
     var theFiles = e.target.files;
+    Array.prototype.forEach.call(theFiles, file =>{
+        arr3.push(file.name);
+    });
+    localStorage.setItem("activityFiles", arr3);
     var relativePath = theFiles[0].webkitRelativePath;
     var pathShower = document.querySelector(".activity-folder-path");
     var folder = relativePath.split("/");
     var folderPath = `C:/documents/activity calender/images/${folder[0]}`
+    localStorage.setItem("activityFolder", folder[0]);
     pathShower.innerHTML = folderPath;
     //now saving folderPath to app-settings.json
     saveToJsonFile(folderPath, "ACTIVITY");
