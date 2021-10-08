@@ -1,0 +1,53 @@
+/* .week-link-btn-text {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Billionary';
+    vertical-align: middle; /*WIP week button changes: centered text (NOTE: NOT WORKING)*/
+
+.this-week-link, .next-week-link{
+  color: white;
+  padding: 15px;
+  width: 15%;
+  height: 1%;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Billionary';
+  vertical-align: middle;
+}
+
+.next-week-link {
+  background-color: #2cb8f0;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+.this-week-link{
+  background-color: #e844f4;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.this-week-link i{
+  margin-right: 50px;
+}
+
+.next-week-link i{
+  margin-left: 50px;
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+  .this-week-link, .next-week-link {
+    font-size: 3.5rem;
+    padding: 25px 15px 0px 15px;
+    width: 12%;
+    height: 3%; /*WIP week button changes: this week and next week buttons are taller*/
+  }
+
+  .next-week-link {
+    right: 80px;
+  }
+}

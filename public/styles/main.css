@@ -1,0 +1,70 @@
+@import 'deletion-box.css';
+@import 'table.css';
+@import 'sidebar.css';
+@import 'week-navigation-btn.css';
+@import 'settings.css';
+
+body {
+  max-width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+*{
+  font-family: 'K Cyrillic Bold', sans-serif;
+}
+
+@font-face {
+  font-family: "Billionary";
+  src: local("Billionary"), url(../misc/fonts/Billionary-Regular.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Bold";
+  src: local("K Cyrillic Bold"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Bold.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Bold Oblique";
+  src: local("K Cyrillic Bold Oblique"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Bold\ Oblique.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Book";
+  src: local("K Cyrillic Book"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Book.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Book Oblique";
+  src: local("K Cyrillic Book Oblique"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Book\ Oblique.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Heavy";
+  src: local("K Cyrillic Heavy"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Heavy.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Heavy Oblique";
+  src: local("K Cyrillic Heavy Oblique"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Heavy\ Oblique.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Light";
+  src: local("K Cyrillic Light"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Light.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Light Oblique";
+  src: local("K Cyrillic Light Oblique"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Light\ Oblique.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Thin";
+  src: local("K Cyrillic Thin"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Thin.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "K Cyrillic Thin Oblique";
+  src: local("K Cyrillic Thin Oblique"), url(../misc/fonts/Kamerik\ 105\ Cyrillic\ Thin\ Oblique.otf) format("truetype");
+}
