@@ -39,7 +39,15 @@ exports.getActivities = function getActivityList()
     }
     return activityList;
 }
-
+exports.getPopular = function getPopularList() 
+{
+    var popularList = [];
+    for(i in file['popular_list'])
+    {
+        popularList[i]= file['popular_list'][i];
+    }
+    return popularList;
+}
 /*
 var PeopleImages = this.getPeople();
 var TransportationImages = this.getTransportation();

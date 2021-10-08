@@ -2,59 +2,67 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var mongo = require('mongodb');
-
+////////////////////////////////////////////////////////////
 var fs = require('fs');
+var settingsjson = 'settings.json';
+//////////////////////////////////////////////////////////
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('port', (process.env.PORT || 5000));
+app.use(express.static(__dirname + '\\public'));
+app.set('views', __dirname + '\\public');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var lists = ('./getLists');
+var jsonread = require('./readfile');
+var lists = require('./getLists');
 var PeopleList = lists.getPeople();
 var TransportationList= lists.getTransportation();
 var ActivitiesList = lists.getActivities();
 var all_images = lists.getAll();
+var PopularList = lists.getPopular();
+var settings = jsonread.get(settingsjson);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname + `\\public`));
-app.set('views', __dirname + '\\public');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-
 // default path for node app -> opens on index.html
 app.get('*', function(req, res){
     res.render('index.html');
 });
-
+//////////////////////////////////////////////////////////////
+app.get('/settings', function(req, res) {
+    res.render(settings);
+    console.log(settings);
+});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/people', function(req, res) {
-    res.sendFile(PeopleList);
-    
+app.get('/abc-people', function(req, res) {
+    res.render(PeopleList);
+    console.log(PeopleList);
 });
 
 //(POST) https://<host-name>:9001/images/people/save -> saves people files to DB
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/transport', function(req, res){
-    res.sendFile(TransportationList)
+app.get('/abc-transport', function(req, res){
+    res.render(TransportationList);
+    console.log(TransportationList);
 });
 //(POST) https://<host-name>:9001/images/transport/save -> saves transportation image files to DB
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/activities', function(req, res) {
-     res.sendFile(ActivitiesList);
+app.get('/abc-activity', function(req, res) {
+     res.render(ActivitiesList);
+     console.log(ActivitiesList);
 });
 
 // (POST) https://<host-name>:9001/images/activities/save -> saves people files to DB
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- app.get('/people', function(req, res) {
-     res.sendFile('https://ouractivitycalander:9001/images/popular/');
+ app.get('/popular', function(req, res) {
+  res.render(PopularList);
+  console.log(PopularList);
 });
 
 //(POST) https://<host-name>:<port-number>/images/popular/save -> saves people files to DB
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/all', function(req, res) {
-     res.sendFile(all_images);
+     res.render(all_images);
+     console.log(all_images);
 });
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

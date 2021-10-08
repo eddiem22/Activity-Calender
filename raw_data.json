@@ -22,6 +22,12 @@
         {"name":"activity_british_museum", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/British%20Museum.png?raw=true"},
         {"name":"activity_brockwell_park", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/Brockwell%20Park.png?raw=true"},
         {"name":"activity_the_barbican", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/The%20Barbican.png?raw=true"}
+],
+"popular_list": [  
+    {"name":"transport_cycle","URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/cycle.png?raw=true"},
+    {"name":"transport_train", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/train.png?raw=true"},
+    {"name":"transport_ferry", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/ferry.png?raw=true"},
+    {"name":"activity_aylesbury", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/Aylesbury.png?raw=true"}
 ] 
 }
  

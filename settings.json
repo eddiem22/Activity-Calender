@@ -1,0 +1,11 @@
+{
+    "image_folder_settings": [
+        {
+            "activity_folder_location": "C:/documents/activity calender/images/activities",
+            "people_folder_location": "C:/documents/activity calender/images/people",
+            "popular_folder_location": "C:/documents/activity calender/images/transportation",
+            "transport_folder_location": "C:/documents/activity calender/images/locations"
+        }
+    ],
+    "last_modified": "8/0/2021 17:41:27"
+}

@@ -1,0 +1,77 @@
+.p1 {
+  display: inline;
+  position: absolute;
+  width: 100%;
+}
+.main-table {
+  display: inline;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: scroll;
+}
+.main-table tr th {
+  /*padding: 250px;*/
+  height: 10vh;
+  padding: none;
+  margin: 0;
+  /*width: 15vh;*/
+  /*width: 17vw;*/
+}
+
+/*WIP column changes: thinner time of day column*/
+.main-table tr th.time-of-day{
+    width: 9.2vw;
+    column-width: 1vw;
+}
+
+.main-table tr td {
+  /*padding: 250px;*/
+  height: 27vh;
+  padding: none;
+  margin: 0;
+}
+.main-table tbody {
+  display: table;
+  width: 100%;
+  padding: 0;
+}
+.border-row {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  /* background-color: red */
+}
+.monday-col,
+.wednesday-col,
+.friday-col,
+.sunday-col {
+  background-color: #fbebcc;
+}
+
+.tuesday-col,
+.thursday-col,
+.saturday-col {
+  background-color: #fbf7ef;
+}
+
+.main-table th img {
+  width: 9vw; /*WIP column changes: smaller time of day images - Kyle*/
+}
+.time-of-day img {
+  position: relative;
+  width: 1vw;
+}
+
+.this-week {
+  color: #d191da;
+  font-size: 2vw; /*WIP column changes: smaller "This Week" title text*/
+}
+.next-week{
+  color: #38b9f6;
+  font-size: 2vw; /*WIP column changes: smaller "Next Week" title text*/
+}
+.day-segment {
+  /*width: 5.9vw !important;*/
+  width: 7.8vw !important; /*WIP column changes: Slightly larger day of the week images*/
+  height: 18.5vh !important;
+  object-fit: contain;
+}
