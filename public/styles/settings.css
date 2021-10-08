@@ -1,0 +1,240 @@
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 8px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 28px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.settings-area td{
+    border: none !important;
+}
+.switch-title{
+    display: inline;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.settings-icon{
+    color: #7c7a7d;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.settings-icon i{
+    cursor: pointer;
+}
+.settings-icon i:hover{
+    opacity: 0.7;
+}
+/* left toggle settings */
+.menuOnLeft {
+    position: absolute;
+    left: -21vw; /*Larger sidebar changes: Offset more to the left for new size - Kyle*/
+    /*left: -20.5vw;*/ /*Old size*/
+    direction: rtl;
+    background-color: #fbd988;
+    width: 22vw;
+    height: 65vh;
+    transition: 0.4s;
+    overflow: scroll;
+    height: 100vh;
+}
+.barOnLeft {
+    padding: 0;
+    margin: 0;
+    float: right;
+    display: inline;
+    height: 100vh;
+    width: 2vw; /*Larger sidebar changes: Sidebar toggle is slightly wider - Kyle*/
+}
+
+/* settings page styles */
+.settings-body{
+  background-color: #fbeacc;
+}
+.my-settings{
+  margin-left: 20px !important;
+  margin-top: 20px !important;
+}
+.title{
+  margin-bottom: 20px;
+}
+.folder-dir{
+  margin: 20px auto;
+  padding: 5px auto;
+}
+.folder-dir h3{
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Billionary';
+}
+.paths{
+  display: block;
+  font-family: 'K Cyrillic Thin';
+  letter-spacing: 1.5px;
+}
+.back-btn{
+  font-family: 'Billionary';
+  background-color: #e31cf5 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.back-btn i{
+  margin-right: 10px;
+}
+.desc{
+  margin-top: 20px;
+  font-family: 'Billionary';
+  font-size: 0.8rem;
+}
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  background-color: #efefef !important;
+  border: 1px solid black !important;
+  color: black !important;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+/* MEDIA BREAKPOINTS */
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+  .switch {
+    width: 150px !important;
+    height: 80px !important;
+  }
+  .slider.round {
+    border-radius: 54px;
+  }
+  .slider:before {
+    height: 50px;
+    width: 50px;
+    left: 0px;
+    bottom: 15px;
+  }
+  .switch-title {
+    font-size: 2.8rem;
+    text-align: left;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .sidemenu table td, .menuOnLeft table td {
+    font-size: 5rem;
+  }
+  .settings-icon i {
+    margin-right: 10px;
+  }
+
+  /*settings page*/
+  .settings-body {
+    padding-top: 100px;
+  }
+  .title{
+    font-size: 7rem;
+  }
+  .folder-dir{
+    padding: 100px 0;
+  }
+  .folder-dir h3{
+    font-size: 5rem;
+  }
+  .folder-dir input{
+    font-size: 5rem;
+  }
+  .btn-file {
+    width: 400px;
+    height: 100px;
+    font-size: 2.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .paths {
+    font-size: 3rem;
+    margin-bottom: 50px;
+  }
+  .desc{
+    font-size: 3rem;
+  }
+  .directory-form{
+    padding: 100px 0;
+  }
+  .back-btn{
+    height: 4%;
+    width: 8%;
+    font-size: 3rem !important;
+  }
+}

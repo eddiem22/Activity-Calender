@@ -1,0 +1,27 @@
+ {
+    "people_list": [ 
+        {"name":"maureen", "URL":"https://github.com/j97051/Activity-Calender/blob/main/people/maureen.png?raw=true"},
+        {"name":"jack", "URL":"https://github.com/j97051/Activity-Calender/blob/main/people/jack.png?raw=true"},
+        {"name":"andrew", "URL":"https://github.com/j97051/Activity-Calender/blob/main/people/andrew.png?raw=true"},
+        {"name":"stevie", "URL":"https://github.com/j97051/Activity-Calender/blob/main/people/stevie.png?raw=true"}
+    ],
+    "transport_list": [   
+        {"name":"transport_bus", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/bus.png?raw=true"},
+        {"name":"transport_car", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/car.png?raw=true"},
+        {"name":"transport_cycle","URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/cycle.png?raw=true"},
+        {"name":"transport_ferry", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/ferry.png?raw=true"},
+        {"name":"transport_train", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/train.png?raw=true"},
+        {"name":"transport_underground", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/underground.png?raw=true"},
+        {"name":"transport_walking", "URL":"https://github.com/j97051/Activity-Calender/blob/main/transportation/walking.png?raw=true"}   
+],
+"activity_list": [  
+        {"name":"activity_biking_in_park", "URL":"https://github.com/j97051/Activity-Calender/blob/main/activities/Biking%20in%20the%20park.png?raw=true"},
+        {"name":"activity_canal_boating", "URL":"https://github.com/j97051/Activity-Calender/blob/main/activities/Canal%20Boating.png?raw=true"},
+        {"name":"activity_dancing", "URL":"https://github.com/j97051/Activity-Calender/blob/main/activities/Dancing.png?raw=true"},
+        {"name":"activity_aylesbury", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/Aylesbury.png?raw=true"},
+        {"name":"activity_british_museum", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/British%20Museum.png?raw=true"},
+        {"name":"activity_brockwell_park", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/Brockwell%20Park.png?raw=true"},
+        {"name":"activity_the_barbican", "URL":"https://github.com/j97051/Activity-Calender/blob/main/locations/The%20Barbican.png?raw=true"}
+] 
+}
+ 
