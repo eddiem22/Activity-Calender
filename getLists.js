@@ -1,6 +1,6 @@
-const p= require('./readfile');
-var data = 'raw_data.json';
-var file = p.get(data);
+const p = require('./readfile');
+let data = 'raw_data.json';
+let file = p.get(data);
 
 
 exports.getPeople = function getPeopleList() {
