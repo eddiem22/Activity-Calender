@@ -2,24 +2,31 @@ const express = require('express');
 const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
-const database = require('./config/db')
 const jsonread = require('./readfile')
 const lists = require('./getLists');
-
-const User = require('./models/User');
-const Image = require('./models/Image');
 
 // Load environment variables
 dotenv.config({ path: './config/config.env'});
 
+// Database
+const db = require('./config/db')
+
 // Connect database
-database();
+const connectDB = async () => {
+    try {
+        await db.authenticate();
+        console.log('Database connected...');
+      } catch (err) {
+        console.log('Database error: ' + err.message);
+      }
+}
 
 // Initialize server
 const app = express();
 
 // Body parser
 app.use(express.urlencoded({extended: true}))
+app.use(express.json());
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -43,20 +50,20 @@ let settings = jsonread.get(settingsjson);
 
 /* Routes */
 
-// POST /users
+// POST /api/users
 // If ip doesn't belong to a user, create new user with ip
-app.post('/users', async (req, res) => {
+app.post('/api/users', async (req, res) => {
     try {
         let userIP = req.header('x-forwarded-for') || req.socket.remoteAddress;
     } catch (err) {
         res.status(400).json({success: false, msg: "Couldn't get user ip address"})
     }
     
-    const savedUser = await User.findOne({ ip: userIP });
+    const savedUser = await User.findOne({ ipAddress: userIP });
 
     if (savedUser) res.status(200).json({ success: true, data: savedUser, msg: `Getting user ${savedUser.id}` });
     
-    const user = await User.create({ ip: userIP });
+    const user = await User.create({ ipAddress: userIP });
     res.status(201).json({ success: true, data: user });
 });
 
