@@ -1,12 +1,19 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
+const database = require('./config/db')
 const jsonread = require('./readfile')
 const lists = require('./getLists');
 
-const app = express();
+// Load environment variables
+dotenv.config({ path: './config/config.env'});
 
-const settingsjson = 'settings.json';
+// Connect database
+database();
+
+// Initialize server
+const app = express();
 
 // Body parser
 app.use(express.urlencoded({extended: true}))
@@ -21,6 +28,8 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+const settingsjson = 'settings.json';
+
 // Populate image lists
 let PeopleList = lists.getPeople();
 let TransportationList= lists.getTransportation();
@@ -29,7 +38,7 @@ let ActivitiesList = lists.getActivities();
 let all_images = lists.getAll();
 let settings = jsonread.get(settingsjson);
 
-// Route files
+// Routes
 // default path for node app -> opens on index.html
 app.get('*', function(req, res){
     res.render('index.html');
