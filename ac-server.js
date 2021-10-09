@@ -22,9 +22,9 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 // Populate image lists
-let PopularList = lists.getPopular();
 let PeopleList = lists.getPeople();
 let TransportationList= lists.getTransportation();
+let PopularList = lists.getPopular();
 let ActivitiesList = lists.getActivities();
 let all_images = lists.getAll();
 let settings = jsonread.get(settingsjson);
@@ -53,17 +53,17 @@ app.get('/abc-transport', function(req, res){
     console.log(TransportationList);
 });
 
+// Get all popular images in alphabetical order
+// Would be a separate field for existing objects?
+app.get('/popular', function(req, res) {
+    res.render(PopularList);
+    console.log(PopularList);
+});
+
 // Get all activity images in alphabetical order
 app.get('/abc-activity', function(req, res) {
      res.render(ActivitiesList);
      console.log(ActivitiesList);
-});
-
-// Get all popular images in alphabetical order
-    // Would be a separate field for existing objects?
-app.get('/popular', function(req, res) {
-  res.render(PopularList);
-  console.log(PopularList);
 });
 
 // Get all images in alphabetical order
@@ -71,6 +71,7 @@ app.get('/all', function(req, res) {
      res.render(all_images);
      console.log(all_images);
 });
+
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 10. (POST) https://<host-name>:<port-number>/:<user-address>/this-week/save -> saves progress on thisWeek calendar for logged in user
