@@ -6,6 +6,9 @@ const database = require('./config/db')
 const jsonread = require('./readfile')
 const lists = require('./getLists');
 
+const User = require('./models/User');
+const Image = require('./models/Image');
+
 // Load environment variables
 dotenv.config({ path: './config/config.env'});
 
@@ -38,12 +41,31 @@ let ActivitiesList = lists.getActivities();
 let all_images = lists.getAll();
 let settings = jsonread.get(settingsjson);
 
-// Routes
+/* Routes */
+
+// POST /users
+// If ip doesn't belong to a user, create new user with ip
+app.post('/users', async (req, res) => {
+    try {
+        let userIP = req.header('x-forwarded-for') || req.socket.remoteAddress;
+    } catch (err) {
+        res.status(400).json({success: false, msg: "Couldn't get user ip address"})
+    }
+    
+    const savedUser = await User.findOne({ ip: userIP });
+
+    if (savedUser) res.status(200).json({ success: true, data: savedUser, msg: `Getting user ${savedUser.id}` });
+    
+    const user = await User.create({ ip: userIP });
+    res.status(201).json({ success: true, data: user });
+});
+
 // default path for node app -> opens on index.html
 app.get('*', function(req, res){
     res.render('index.html');
 });
 
+/*
 // Get settings page
 app.get('/settings', function(req, res) {
     res.render(settings);
@@ -80,6 +102,7 @@ app.get('/all', function(req, res) {
      res.render(all_images);
      console.log(all_images);
 });
+*/
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
