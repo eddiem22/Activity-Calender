@@ -15,17 +15,9 @@ module.exports = (db, DataTypes) => {
     location: {
       type: DataTypes.TEXT(500),
     },
-
-    // Foreign Keys
-    imageTypeId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: ImageType,
-        key: 'id',
-      }
-    },
   });
 
+  // Associations
   Image.associate = models => {
     Image.belongsTo(models.ImageType, {
       foreignKey: 'imageTypeId',

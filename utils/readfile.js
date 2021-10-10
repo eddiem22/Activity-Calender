@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-let file = "./raw_data.json";
+let file = "../_data/raw_data.json";
 
 exports.get= function readJsonFile(file) {
     let bufferData = fs.readFileSync(file)

@@ -13,6 +13,7 @@ module.exports = (db, DataTypes) => {
     },
   });
 
+  // Associations
   User.associate = models => {
     User.hasMany(models.Settings);
   }

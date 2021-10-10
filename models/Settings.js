@@ -11,24 +11,9 @@ module.exports = (db, DataTypes) => {
     folderLocation: {
       type: DataTypes.TEXT(150),
     },
-
-    // Foreign Keys
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: User,
-        key: 'id',
-      }
-    },
-    imageTypeId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: ImageType,
-        key: 'id',
-      }
-    },
   });
 
+  // Associations
   Settings.associate = models => {
     Settings.belongsTo(models.User, {
       foreignKey: 'userId',

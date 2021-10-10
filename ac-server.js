@@ -1,15 +1,16 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const fs = require('fs');
 const path = require('path');
-const jsonread = require('./readfile')
-const lists = require('./getLists');
+const getUserIP = require('./utils/getUserIP');
+const jsonread = require('./utils/readfile');
+const lists = require('./utils/getLists');
 
 // Load environment variables
 dotenv.config({ path: './config/config.env'});
 
 // Database
-const db = require('./config/db')
+const db = require('./config/db');
+const Settings = require('./models/Settings');
 
 // Connect database
 const connectDB = async () => {
@@ -38,37 +39,105 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-const settingsjson = 'settings.json';
+const settingsjson = './_data/settings.json';
 
 // Populate image lists
+/*
 let PeopleList = lists.getPeople();
 let TransportationList= lists.getTransportation();
 let PopularList = lists.getPopular();
 let ActivitiesList = lists.getActivities();
 let all_images = lists.getAll();
 let settings = jsonread.get(settingsjson);
+*/
 
 /* Routes */
 
+// Create User
 // POST /api/users
-// If ip doesn't belong to a user, create new user with ip
+// If IP exists, get user. If not, create user
 app.post('/api/users', async (req, res) => {
-    try {
-        let userIP = req.header('x-forwarded-for') || req.socket.remoteAddress;
-    } catch (err) {
-        res.status(400).json({success: false, msg: "Couldn't get user ip address"})
-    }
-    
-    const savedUser = await User.findOne({ ipAddress: userIP });
+    // get current User's IP
+    const userIP = getUserIP(req, res);
 
-    if (savedUser) res.status(200).json({ success: true, data: savedUser, msg: `Getting user ${savedUser.id}` });
+    // Find or Create User
+    const [existingUser, newUser] = await User.findOrCreate({ where: { ipAddress: userIP} });
     
-    const user = await User.create({ ipAddress: userIP });
-    res.status(201).json({ success: true, data: user });
+    // If existing user was found respond with user data
+    if (existingUser) return res.status(200).json({ success: true, data: existingUser});
+    
+    // Else respond with new user data
+    else res.status(201).json({ success: true, data: newUser})
+});
+
+// Update Settings
+// PUT /api/users/:userId/settings
+// Update settings with new file path, or create setting if it doesn't exist
+app.put('/api/users/:userId/settings', async (req, res) => {
+    // set requested user to entered user id
+    const reqUser = await User.findByPk(req.params.userId);
+
+    // get current User's IP
+    const userIP = getUserIP(req, res);
+
+    // if current IP doesn't match requested user's IP, block access to settings
+    if (reqUser.ipAddress !== userIP) return res.status(401).json({ success: false, msg: 'Unauthorized'});
+
+    /********************************************************************************
+     * 
+    We need a way to get the selected path and store it here from request data
+     *
+    *********************************************************************************/
+    const newLocation;
+
+    // Find settings
+    let settings = await Project.findOne({ where: { userId: reqUser.id } });
+
+    // Initialize status code to be returned
+    let statusCode;
+    // If settings exist, update and reload
+    if (settings) {
+        settings.folderLocation = newLocation;
+        await settings.reload();
+        statusCode = 200;
+    // else create new settings
+    } else {
+        settings = await Settings.create({ 
+            folderLocation: newLocation,
+            userId: reqUser.id,
+        });
+        statusCode = 201;
+    }
+
+    // Respond with status code and settings
+    res.status(statusCode).json({ success: true, data: settings })
 });
 
 // default path for node app -> opens on index.html
-app.get('*', function(req, res){
+app.get('*', async (req, res) => {
+    // initialize user
+    let user;
+
+    // make post request to /api/users on page load
+    // set user from post response
+    await fetch('/api/users', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => user = data)
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ success: false, msg: 'Something went wrong'});
+        });
+
+    // make put request to /api/users/:userId/settings
+    // set settings from put response
+    await fetch(`/api/users/${user.id}/settings`, { method: 'PUT' })
+        .then(res => res.json())
+        .then(data => settings = data)
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ success: false, msg: 'Something went wrong'});
+        });
+
     res.render('index.html');
 });
 

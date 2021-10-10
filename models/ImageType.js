@@ -14,9 +14,9 @@ module.exports = (db, DataTypes) => {
     },
   });
 
+  // Associations
   ImageType.associate = models => {
     ImageType.belongsTo(models.Settings);
-
     ImageType.hasMany(models.Image);
   }
 

@@ -1,5 +1,5 @@
 const p = require('./readfile');
-let data = 'raw_data.json';
+let data = '../_data/raw_data.json';
 let file = p.get(data);
 
 
