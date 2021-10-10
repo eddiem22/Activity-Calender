@@ -42,17 +42,16 @@ app.set('view engine', 'html');
 const settingsjson = './_data/settings.json';
 
 // Populate image lists
-/*
 let PeopleList = lists.getPeople();
 let TransportationList= lists.getTransportation();
 let PopularList = lists.getPopular();
 let ActivitiesList = lists.getActivities();
 let all_images = lists.getAll();
 let settings = jsonread.get(settingsjson);
-*/
 
 /* Routes */
 
+/*
 // Create User
 // POST /api/users
 // If IP exists, get user. If not, create user
@@ -83,15 +82,13 @@ app.put('/api/users/:userId/settings', async (req, res) => {
     // if current IP doesn't match requested user's IP, block access to settings
     if (reqUser.ipAddress !== userIP) return res.status(401).json({ success: false, msg: 'Unauthorized'});
 
-    /********************************************************************************
-     * 
-    We need a way to get the selected path and store it here from request data
-     *
-    *********************************************************************************/
-    const newLocation;
+    /////////////////////////////////////////////////////////////////////////////
+    //We need a way to get the selected path and store it here from request data
+    /////////////////////////////////////////////////////////////////////////////
+    let newLocation;
 
     // Find settings
-    let settings = await Project.findOne({ where: { userId: reqUser.id } });
+    let settings = await Settings.findOne({ where: { userId: reqUser.id } });
 
     // Initialize status code to be returned
     let statusCode;
@@ -112,9 +109,11 @@ app.put('/api/users/:userId/settings', async (req, res) => {
     // Respond with status code and settings
     res.status(statusCode).json({ success: true, data: settings })
 });
+*/
 
 // default path for node app -> opens on index.html
 app.get('*', async (req, res) => {
+    /*
     // initialize user
     let user;
 
@@ -137,11 +136,11 @@ app.get('*', async (req, res) => {
             console.log(err);
             res.status(500).json({ success: false, msg: 'Something went wrong'});
         });
+    */
 
     res.render('index.html');
 });
 
-/*
 // Get settings page
 app.get('/settings', function(req, res) {
     res.render(settings);
@@ -178,14 +177,45 @@ app.get('/all', function(req, res) {
      res.render(all_images);
      console.log(all_images);
 });
-*/
 
-/*
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-10. (POST) https://<host-name>:<port-number>/:<user-address>/this-week/save -> saves progress on thisWeek calendar for logged in user
-11. (POST) https://<host-name>:<port-number>/:<user-address>/next-week/save -> saves progress on nextWeek calendar for logged in user
-12. (POST) https://<host-name>:<port-number>/:<user-address>/settings/save -> saves settings (aka folder locations on local machine) for logged in user
-*/
+// 10. (POST) https://<host-name>:<port-number>/:<user-address>/this-week/save -> saves progress on thisWeek calendar for logged in user
+app.post('/:ipAddress/this-week/save/', async (req, res) => {
+    // get current User's IP
+    const userIP = getUserIP(req, res);
+
+    // if current IP doesn't match requested user's IP, block access
+    if (req.params.ipAddress !== userIP) return res.status(401).json({ success: false, msg: 'Unauthorized'});
+    
+    try {
+        const image = await Image.create({ name: req.body.name, location: req.body.location });
+        res.status(201).json({ success: true, data: image });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// 11. (POST) https://<host-name>:<port-number>/:<user-address>/next-week/save -> saves progress on nextWeek calendar for logged in user
+app.post('/:ipAddress/next-week/save/', async (req, res) => {
+    // get current User's IP
+    const userIP = getUserIP(req, res);
+
+    // if current IP doesn't match requested user's IP, block access
+    if (req.params.ipAddress !== userIP) return res.status(401).json({ success: false, msg: 'Unauthorized'});
+    
+    try {
+        const image = await Image.create({ name: req.body.name, location: req.body.location });
+        res.status(201).json({ success: true, data: image });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false });
+    }
+});
+
+// 12. (POST) https://<host-name>:<port-number>/:<user-address>/settings/save -> saves settings (aka folder locations on local machine) for logged in user
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Set port

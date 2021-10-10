@@ -1,5 +1,6 @@
+const path = require('path');
 const p = require('./readfile');
-let data = '../_data/raw_data.json';
+let data = path.join(__dirname, '../_data/raw_data.json');
 let file = p.get(data);
 
 
