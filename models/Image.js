@@ -6,23 +6,37 @@ module.exports = (db, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      //autoIncrement: true,
       allowNull: false,
     },
-    name: {
+    fileName: {
       type: DataTypes.TEXT(150),
+      allowNull: false,
     },
-    location: {
-      type: DataTypes.TEXT(500),
+    imageTypeId: {
+      type: DataTypes.INTEGER(150),
+      foreignKey: true,
+      allowNull: false,
+    },
+    fileType: {
+      type: DataTypes.TEXT(50),
+      allowNull:false,
     },
   });
 
-  // Associations
+  // end of Associations
   Image.associate = models => {
-    Image.belongsTo(models.ImageType, {
+    Image.hasOne(models.ImageType, {
       foreignKey: 'imageTypeId',
+      allowNull: false,
     });
-  };
 
+    Image.hasMany(models.ImageCopies, {
+      foreignKey: "imageId",
+    });
+
+  };
+  // end of Associations
   return Image;
 };
+
