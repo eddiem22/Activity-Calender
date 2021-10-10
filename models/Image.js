@@ -4,13 +4,13 @@ const db = require('../config/db');
 module.exports = (db, DataTypes) => {
   const Image = db.define('image', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
       //autoIncrement: true,
       allowNull: false,
     },
     fileName: {
-      type: DataTypes.TEXT(150),
+      type: DataTypes.STRING(150),
       allowNull: false,
     },
     imageTypeId: {
@@ -19,7 +19,7 @@ module.exports = (db, DataTypes) => {
       allowNull: false,
     },
     fileType: {
-      type: DataTypes.TEXT(50),
+      type: DataTypes.STRING(50),
       allowNull:false,
     },
   });

@@ -4,7 +4,7 @@ const db = require('../config/db');
 module.exports = (db, DataTypes) => {
   const WeekTag = db.define('WeekTag', {
     Id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
